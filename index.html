@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean UAE | تنظيف الفخامة — Premium Cleaning Services & Management Platform</title>
+    <meta name="description" content="Leading professional cleaning service in Ajman & UAE. Book residential, deep cleaning, sofa, carpet, water tank cleaning and housekeeping contracts online.">
+    
+    <!-- Google Fonts: Inter for English, Cairo for Arabic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Remix Icon for Clean Modern Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="bg-surface text-main">
+
+    <!-- Demo Mode & Quick Role Switcher Bar -->
+    <div id="demo-bar" class="demo-bar">
+        <div class="demo-bar-container">
+            <div class="demo-badge">
+                <i class="ri-pulse-line"></i>
+                <span data-i18n="demo_mode">DEMO MODE — Clean UAE Frontend</span>
+            </div>
+            
+            <div class="demo-controls">
+                <label for="demo-role-select" class="demo-label" data-i18n="quick_role_switch">Switch View / Role:</label>
+                <select id="demo-role-select" class="demo-select">
+                    <option value="public" selected>🌐 Public Website & Booking</option>
+                    <option value="customer">👤 Customer Portal (Sara Al-Nuaimi)</option>
+                    <option value="staff">🧹 Staff Field App (Rashid - Cleaner)</option>
+                    <option value="dispatcher">🗓️ Dispatcher Portal (Tariq)</option>
+                    <option value="finance">💰 Finance & Cash Portal (Mariam)</option>
+                    <option value="admin">⚙️ Admin / Owner Center (Clean UAE HQ)</option>
+                </select>
+
+                <!-- Language Switcher Button -->
+                <button id="lang-toggle-btn" class="btn-demo-lang" title="Toggle Language">
+                    <i class="ri-global-line"></i>
+                    <span id="current-lang-text">العربية</span>
+                </button>
+
+                <!-- Theme Switcher Button -->
+                <button id="theme-toggle-btn" class="btn-demo-theme" title="Toggle Theme">
+                    <i class="ri-moon-line" id="theme-icon"></i>
+                </button>
+
+                <!-- Reset Demo Data -->
+                <button id="reset-demo-btn" class="btn-demo-reset" title="Reset Demo State">
+                    <i class="ri-refresh-line"></i>
+                    <span data-i18n="reset_data">Reset Data</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header (Loaded by Navbar Component) -->
+    <header id="main-header" class="site-header"></header>
+
+    <!-- App Main Container View Root -->
+    <main id="app-root" class="app-content-root"></main>
+
+    <!-- Main Footer (Loaded by Footer Component) -->
+    <footer id="main-footer" class="site-footer"></footer>
+
+    <!-- Global Modal Root Container -->
+    <div id="modal-root"></div>
+
+    <!-- Global Notification Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- JS Application Scripts (ES Modules / Structured Imports) -->
+    <script src="js/mockData.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/services/storage.js"></script>
+    <script src="js/services/api.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/router.js"></script>
+    
+    <!-- Components -->
+    <script src="js/components/common.js"></script>
+    <script src="js/components/notifications.js"></script>
+    <script src="js/components/modalManager.js"></script>
+    <script src="js/components/navbar.js"></script>
+    <script src="js/components/footer.js"></script>
+    <script src="js/components/bookingModal.js"></script>
+    <script src="js/components/publicPages.js"></script>
+    <script src="js/components/customerPortal.js"></script>
+    <script src="js/components/staffPortal.js"></script>
+    <script src="js/components/dispatcherPortal.js"></script>
+    <script src="js/components/adminPortal.js"></script>
+    <script src="js/components/financePortal.js"></script>
+    
+    <!-- App Entry Point -->
+    <script src="js/app.js"></script>
+</body>
+</html>
