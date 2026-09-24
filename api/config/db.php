@@ -1,37 +1,41 @@
 <?php
 /**
  * Clean UAE (تنظيف الفخامة) — PDO Database Connection Singleton
+ * Uses .env configuration with secure connection options
  */
+
+require_once __DIR__ . '/env.php';
 
 class Database {
     private static ?PDO $instance = null;
 
     public static function getConnection(): PDO {
         if (self::$instance === null) {
-            $host = $_ENV['DB_HOST'] ?? '127.0.0.1';
-            $db   = $_ENV['DB_NAME'] ?? 'cleanuae_db';
-            $user = $_ENV['DB_USER'] ?? 'root';
-            $pass = $_ENV['DB_PASS'] ?? '';
+            $host    = Env::get('DB_HOST', '127.0.0.1');
+            $port    = Env::get('DB_PORT', '3306');
+            $db      = Env::get('DB_NAME', 'cleanuae_db');
+            $user    = Env::get('DB_USER', 'root');
+            $pass    = Env::get('DB_PASS', '');
             $charset = 'utf8mb4';
 
-            $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+            $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=$charset";
             $options = [
                 PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES   => false,
+                PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci"
             ];
 
             try {
                 self::$instance = new PDO($dsn, $user, $pass, $options);
             } catch (PDOException $e) {
-                // If database connection fails, return JSON error gracefully
-                header('Content-Type: application/json');
+                header('Content-Type: application/json; charset=utf-8');
                 http_response_code(500);
                 echo json_encode([
                     'status' => 500,
                     'success' => false,
                     'message' => 'Database connection failed: ' . $e->getMessage()
-                ]);
+                ], JSON_UNESCAPED_UNICODE);
                 exit;
             }
         }
