@@ -4,8 +4,11 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-  // 1. Initialize Reactive Central Store
+  // 1. Initialize Reactive Central Store & Auth Session
   window.CLEAN_UAE_STORE.init();
+  if (window.CLEAN_UAE_AUTH) {
+    window.CLEAN_UAE_AUTH.init();
+  }
 
   // 2. Set up Language Toggle Listener
   var langBtn = document.getElementById('lang-toggle-btn');

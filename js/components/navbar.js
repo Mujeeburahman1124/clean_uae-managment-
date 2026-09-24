@@ -49,9 +49,20 @@ window.CLEAN_UAE_NAVBAR = {
             <i class="ri-calendar-check-line"></i> ${CLEAN_UAE_I18N.t('nav_book_now')}
           </button>
 
-          <button onclick="CLEAN_UAE_MODAL.openOtpLogin()" class="btn btn-secondary btn-sm" title="Customer Login / OTP">
-            <i class="ri-user-3-line"></i> ${CLEAN_UAE_I18N.t('nav_portal')}
-          </button>
+          ${(window.CLEAN_UAE_AUTH && window.CLEAN_UAE_AUTH.isAuthenticated()) ? `
+            <div style="display:flex; align-items:center; gap:8px;">
+              <a href="#${window.CLEAN_UAE_AUTH.getUser().role === 'customer' ? 'customer' : window.CLEAN_UAE_AUTH.getUser().role}" class="btn btn-secondary btn-sm" title="Open My Portal">
+                <i class="ri-user-smile-line"></i> ${window.CLEAN_UAE_AUTH.getUser().name.split(' ')[0]} (${window.CLEAN_UAE_AUTH.getUser().role})
+              </a>
+              <button onclick="CLEAN_UAE_AUTH.logout()" class="btn btn-outline btn-sm" title="Logout">
+                <i class="ri-logout-box-r-line"></i>
+              </button>
+            </div>
+          ` : `
+            <button onclick="CLEAN_UAE_MODAL.openOtpLogin()" class="btn btn-secondary btn-sm" title="Customer / Staff Login">
+              <i class="ri-user-3-line"></i> ${CLEAN_UAE_I18N.t('nav_portal')}
+            </button>
+          `}
         </div>
       </nav>
     `;

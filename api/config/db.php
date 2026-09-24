@@ -1,7 +1,7 @@
 <?php
 /**
  * Clean UAE (تنظيف الفخامة) — PDO Database Connection Singleton
- * Uses .env configuration with secure connection options
+ * Uses .env configuration with secure connection options & exception masking
  */
 
 require_once __DIR__ . '/env.php';
@@ -29,12 +29,27 @@ class Database {
             try {
                 self::$instance = new PDO($dsn, $user, $pass, $options);
             } catch (PDOException $e) {
+                // Log internally without exposing credentials to caller
+                $logDir = __DIR__ . '/../../uploads/logs';
+                if (!is_dir($logDir)) {
+                    @mkdir($logDir, 0750, true);
+                }
+                @file_put_contents(
+                    "$logDir/db_errors.log",
+                    "[" . date('Y-m-d H:i:s') . "] Connection failed: " . $e->getMessage() . "\n",
+                    FILE_APPEND
+                );
+
                 header('Content-Type: application/json; charset=utf-8');
                 http_response_code(500);
+                
+                $isDebug = filter_var(Env::get('APP_DEBUG', false), FILTER_VALIDATE_BOOLEAN);
                 echo json_encode([
                     'status' => 500,
                     'success' => false,
-                    'message' => 'Database connection failed: ' . $e->getMessage()
+                    'message' => $isDebug 
+                        ? 'Database connection failed: ' . $e->getMessage() 
+                        : 'Database service is temporarily unavailable. Please try again later.'
                 ], JSON_UNESCAPED_UNICODE);
                 exit;
             }

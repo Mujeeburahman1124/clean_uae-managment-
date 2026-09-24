@@ -8,6 +8,9 @@ require_once __DIR__ . '/config/response.php';
 $route = $_GET['route'] ?? $_GET['endpoint'] ?? '';
 
 switch ($route) {
+    case 'auth':
+        require_once __DIR__ . '/endpoints/auth.php';
+        break;
     case 'services':
         require_once __DIR__ . '/endpoints/services.php';
         break;
@@ -37,6 +40,21 @@ switch ($route) {
         break;
     case 'settings':
         require_once __DIR__ . '/endpoints/settings.php';
+        break;
+    case 'slot_holds':
+        require_once __DIR__ . '/endpoints/slot_holds.php';
+        break;
+    case 'invoices':
+        require_once __DIR__ . '/endpoints/invoices.php';
+        break;
+    case 'contracts':
+        require_once __DIR__ . '/endpoints/contracts.php';
+        break;
+    case 'offers':
+        require_once __DIR__ . '/endpoints/offers.php';
+        break;
+    case 'feedback':
+        require_once __DIR__ . '/endpoints/feedback.php';
         break;
     default:
         ApiResponse::send([
